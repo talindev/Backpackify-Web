@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    storage creation
+{% endblock %}
+
+{% block main %}
+<div class="container">
+    <form action="/create" method="post">
+        <input autocomplete="off" class="form-control mx-auto w-auto mb-3" name="storage_name" placeholder="Storage name" type="text">
+
+        <input type="radio" class="form-check-input m-1" id="backpack" name="storage_type" value="backpack">
+        <label for="backpack" class="form-check-label m-1">Backpack</label>
+
+        <input type="radio" class="form-check-input m-1" id="luggage" name="storage_type" value="luggage">
+        <label for="luggage" class="form-check-label m-1">Luggage</label>
+
+        <input type="radio" class="form-check-input m-1" id="others" name="storage_type" value="others">
+        <label for="others" class="form-check-label m-1">Others</label>
+
+        <input autocomplete="off" class="form-control mx-auto w-auto m-3" name="location" placeholder="Storage destiny (optional)" type="text">
+
+        <input autocomplete="off" class="form-control mx-auto w-auto m-3" name="use" placeholder="Storage use (optional)" type="text">
+
+        <textarea autocomplete="off" class="form-control mx-auto w-auto m-3" name="content" placeholder="List of items" style="margin: 3px;"></textarea>
+        <button class="btn btn-outline-primary w-auto d-block mx-auto" type="submit">Create storage</button>
+    </form>
+</div>
+{% endblock %}
+
+{% for bag in bags %}
+<button type="button" data-bs-toggle="modal" data-bs-target="#modal-{{ loop.index }}">open</button>
+<!-- Modal -->
+<div class="modal fade" id="modal-{{ loop.index }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+        ...
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+    </div>
+    </div>
+</div>
+<!-- end modal -->
+{% endfor %}

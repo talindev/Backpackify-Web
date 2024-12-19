@@ -1,0 +1,170 @@
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/static/slava-auchynnikau-Ui0xoJz_WYY-unsplash.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(2px);
+    z-index: -1;
+}
+
+body {
+    margin: 0;
+}
+
+nav {
+    margin: 0;
+}
+
+
+div {
+    z-index: 1;
+    padding: 20px;
+    width: 420px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.logo {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    color: #7a695d;
+    margin: 4px;
+    padding: 4px;
+}
+
+.img_logo {
+    width: 5vh;
+    height: 5vh;
+}
+
+.logo-web {
+    position: absolute;
+    font-size: 1.1rem;
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 250;
+    font-style: normal;
+    color: #7a695d;
+    transform: translate(-2.5rem, 1.7rem);
+}
+
+.backpack {
+    color: white;
+    z-index: 1;
+    margin: 5px;
+    padding: 20px;
+    width: 420px;
+    background: coral;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.luggage {
+    z-index: 1;
+    margin: 5px;
+    padding: 20px;
+    width: 420px;
+    background: lightgreen;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    text-align: center;
+}
+
+
+.others {
+    color: white;
+    z-index: 1;
+    margin: 5px;
+    padding: 20px;
+    width: 420px;
+    background: purple;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.bag-search {
+    background: transparent !important;
+    border: 2px solid rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(20px) !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) !important;
+    border-radius: 8px !important;
+}
+
+.search-box {
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+.add-btn {
+    border-radius: 8px !important;
+}
+
+button.w-85 {
+    margin: 10px 0;
+}
+
+button.w-85:hover {
+    transform: scale(1.02);
+}
+
+.bag-box {
+    border: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    height: 50vh;
+    width: 50vw;
+    text-align: center !important;
+}
+
+.other-box {
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+/* external recommendation */
+.modal-content {
+    max-height: 90vh; /* Limita a altura do modal a 90% da altura da viewport */
+    overflow-y: auto; /* Permite rolagem vertical caso o conteúdo exceda a altura */
+    word-wrap: break-word; /* Garante que o texto longo não "vaze" para fora */
+}
+
+.modal-body {
+    padding: 1rem;
+    overflow-y: auto; /* Adiciona rolagem apenas ao corpo do modal */
+    max-height: 70vh; /* Define o máximo de altura para o corpo do modal */
+    word-wrap: break-word; /* Quebra textos longos */
+}
+
+.dlt-btn {
+    height: 4vh !important;  /* Ajuste o tamanho do botão conforme necessário */
+    width: 4vh !important;   /* Ajuste o tamanho do botão conforme necessário */
+    display: flex;           /* Define como flexbox */
+    align-items: center;     /* Alinha o ícone verticalmente */
+    justify-content: center; /* Alinha o ícone horizontalmente */
+    border-radius: 15%;      /* Faz o botão ser redondo, se necessário */
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}

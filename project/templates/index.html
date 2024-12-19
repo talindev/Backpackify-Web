@@ -1,0 +1,141 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    home
+{% endblock %}
+{% block main %}
+    <div class="container d-flex flex-column align-items-center">
+        <div class="input-group mb-3 search-box w-50">
+            <input type="search" class="form-control bag-search m-1" aria-describedby="basic-addon2" id="querySearch">
+            <a class="btn btn-primary m-1 add-btn" href="/create"><i class="bi bi-plus-lg"></i></a>
+        </div>
+        <ul id="result-list"></ul>
+    </div>
+    <script>
+            window.addEventListener('load', async function() {
+            let query = '';
+
+            let response = await fetch('/search?q=' + query);
+
+            
+            if (response.ok) {
+                let bags = await response.json();
+                console.log('Resposta JSON:', bags);
+
+                let list = document.getElementById('result-list');
+                list.innerHTML = '';
+
+                bags.forEach(bag => {
+                    let li = document.createElement('li');
+                    li.innerHTML = `
+                        <button type="button" class="w-85 p-0 border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#modal-${bag.id}">
+                            <div class="${bag.storage_type} d-flex flex-column align-items-center text-center">
+                                <div class="d-flex flex-row search-box m-1 p-0 justify-content-center" style="gap: 10px; width: 100%;">
+                                    <i class="bi bi-pencil-square"></i><h4>${bag.storage_name}</h4>
+                                </div>
+                                <div class="d-flex flex-row search-box m-1 p-0 justify-content-center" style="gap: 10px; width: 100%;">
+                                    <i class="bi bi-luggage"></i><h4>${bag.storage_type}</h4>
+                                </div>
+                                <div class="d-flex flex-row search-box m-1 p-0 justify-content-center" style="gap: 10px; width: 100%;">
+                                    <i class="bi bi-airplane"></i><h4>${bag.location}</h4>
+                                </div>
+                                <div class="d-flex flex-row search-box m-1 p-0 justify-content-center" style="gap: 10px; width: 100%;">
+                                    <i class="bi bi-boxes"></i><h4>${bag.use}</h4>
+                                </div>
+                                <a href="#" class="btn btn-danger -flex flex-row search-box m-1 p-0 align-items-center justify-content-center dlt-btn" data-bs-toggle="modal" data-bs-target="#modal-delete-${bag.id}">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </div>
+                        </button>
+                    `;
+                    list.appendChild(li);
+                });
+            } else {
+                console.error('Erro na requisição:', response.status);
+            }
+        });
+
+        let input = document.getElementById('querySearch');
+        input.addEventListener('input', async function() {
+            let query = input.value;
+
+            let response = await fetch('/search?q=' + query);
+
+            if (response.ok) {
+                let bags = await response.json();
+                console.log('Resposta JSON:', bags);
+
+                let list = document.getElementById('result-list');
+                list.innerHTML = '';
+
+                bags.forEach(bag => {
+                    let li = document.createElement('li');
+                    li.innerHTML = `
+                        <button type="button" class="w-85 p-0 border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#modal-${bag.id}">
+                            <div class="${bag.storage_type} d-flex flex-column align-items-center text-center">
+                                <div class="d-flex flex-row search-box m-1 p-0 justify-content-center" style="gap: 10px; width: 100%;">
+                                    <i class="bi bi-pencil-square"></i><h4>${bag.storage_name}</h4>
+                                </div>
+                                <div class="d-flex flex-row search-box m-1 p-0 justify-content-center" style="gap: 10px; width: 100%;">
+                                    <i class="bi bi-luggage"></i><h4>${bag.storage_type}</h4>
+                                </div>
+                                <div class="d-flex flex-row search-box m-1 p-0 justify-content-center" style="gap: 10px; width: 100%;">
+                                    <i class="bi bi-airplane"></i><h4>${bag.location}</h4>
+                                </div>
+                                <div class="d-flex flex-row search-box m-1 p-0 justify-content-center" style="gap: 10px; width: 100%;">
+                                    <i class="bi bi-boxes"></i><h4>${bag.use}</h4>
+                                </div>
+                                <a href="#" class="btn btn-danger -flex flex-row search-box m-1 p-0 align-items-center justify-content-center dlt-btn" data-bs-toggle="modal" data-bs-target="#modal-delete-${bag.id}">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </div>
+                        </button>
+                    `;
+                    list.appendChild(li);
+                });
+            } else {
+                console.error('Erro na requisição:', response.status);
+            }
+        });
+    </script>
+{% endblock %}
+{% block modals %}
+{% for bag in bags %}
+<!-- Modal -->
+<div class="modal fade" id="modal-{{ bag['id'] }}" tabindex="-1" aria-labelledby="modalLabel-{{ bag['id'] }}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered search-box">
+    <div class="modal-content">
+        <div class="modal-body search-box">
+            <p class="fs-6 fs-md-5 fs-lg-4">
+            {{ bag["content"] }}
+            </p>
+        </div>
+    </div>
+    </div>
+</div>
+<!-- end modal -->
+
+<!-- Delete Modal -->
+<div class="modal fade" id="modal-delete-{{ bag['id'] }}" tabindex="-1" aria-labelledby="modalDeleteLabel-{{ bag['id'] }}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered search-box">
+        <div class="modal-content">
+            <div class="modal-header search-box">
+                <h5 class="modal-title" id="modalDeleteLabel-{{ bag['id'] }}">Confirm Exclusion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body search-box">
+                <p>Are you sure you would like to delete storage named <strong>{{ bag['storage_name'] }}</strong>?</p>
+            </div>
+            <div class="modal-footer search-box">
+                <form action="/delete" method="post" style="display: inline;">
+                    <input type="hidden" name="storage_name" value="{{ bag['storage_name'] }}">
+                    <button type="submit" class="btn btn-danger">Yes, delete</button>
+                </form>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end delete modal -->
+{% endfor %}
+{% endblock %}

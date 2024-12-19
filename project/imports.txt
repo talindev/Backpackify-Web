@@ -1,0 +1,13 @@
+LIBRARIES/FRAMEWORKS USED (APP.PY)
+
+os
+cs50
+flask
+flask_session
+flask_mail
+werkzeug.security
+datetime
+string
+secrets
+
+helpers.py => implemented/recommended helper functions/decorators
